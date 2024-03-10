@@ -25,7 +25,7 @@ const TopTab = () => {
             }
             width={"100%"}
             height={300}
-            radius={0}
+            radius={0.0}
           />
 
           <AppBar
