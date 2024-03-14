@@ -1,81 +1,69 @@
-import { StyleSheet, Text, View, VirtualizedList } from "react-native";
+import { StyleSheet, Text, View, VirtualizedList, ActivityIndicator } from "react-native";
 import React from "react";
 import HeightSpacer from "../Reusable/HeightSpacer";
-import { SIZES } from "../../constants/theme";
+import { COLORS, SIZES } from "../../constants/theme";
 import Country from "../Tiles/Country/Country";
+import fetchCountries from "../../hook/fetchContries";
 
 const Places = () => {
-  const state =  [
-    {
-      _id: "64c62bfc65af9f8c969a8d04",
-      state: "Rajasthan",
-      description:
-        "Rajasthan, the land of kings, is a state in northwest India revered for its rich religious heritage. From the majestic temples of Khajuraho to the sacred city of Pushkar, Rajasthan is a spiritual haven for devotees. The state is home to several prominent Hindu and Jain pilgrimage sites, including the iconic Ranakpur Jain temples and the Sri Govind Dev Ji Temple in Jaipur. Rajasthan's vibrant festivals, such as the Gangaur and Teej, celebrate the divine with fervor and enthusiasm.",
-      imageUrl:
-        "https://www.godigit.com/content/dam/godigit/directportal/en/contenthm/rajasthan-famous.jpg",
-      region: "Northwest India, Rajasthan",
-    },
-    {
-      _id: "64cf2c565d14628d0ac0a2b7",
-      state: "Kerala",
-      description:
-        "Kerala, known as 'God's Own Country,' is a state in southwest India renowned for its religious diversity and spiritual significance. The state is home to ancient Hindu temples, such as the Sri Padmanabhaswamy Temple and the Guruvayur Temple, as well as numerous churches and mosques, reflecting its rich cultural heritage. Kerala's backwaters and serene landscapes have been a haven for spiritual seekers and ascetics for centuries, offering a peaceful environment for meditation and self-discovery.",
-      imageUrl:
-        "https://media.istockphoto.com/id/1246366598/photo/a-scenic-view-of-boats-under-a-blue-sky-in-backwaters-situated-in-allepey-town-located-in.jpg?s=612x612&w=0&k=20&c=YBv_3nP-6YjvN9JRhaNsBmq8ke4azCgvGLS5h3r9jSk=",
-      region: "Southwest India, Kerala",
-    },
-    {
-      _id: "64cf2c935d14628d0ac0a2b9",
-      state: "Goa",
-      description:
-        "Goa, a tiny state on the western coast of India, is not only a beach paradise but also a spiritual sanctuary. The state is renowned for its beautiful churches, reflecting its Portuguese colonial past and the strong influence of Catholicism. The Basilica of Bom Jesus, a UNESCO World Heritage Site, houses the remains of St. Francis Xavier, attracting pilgrims worldwide. Goa's temples, such as the Mangueshi and Shantadurga, offer a glimpse into the state's rich Hindu heritage.",
-      imageUrl:
-        "https://static.toiimg.com/thumb/msid-55310626,width-748,height-499,resizemode=4,imgsize-175052/.jpg",
-      region: "West India, Goa",
-    },
-    {
-      _id: "64cf2d095d14628d0ac0a2bd",
-      state: "Uttarakhand",
-      description:
-        "Uttarakhand, located in the northern Himalayan region of India, is a land steeped in Hindu mythology and spirituality. The state is home to the revered Char Dham (four main shrines) – Badrinath, Kedarnath, Gangotri, and Yamunotri – which are major Hindu pilgrimage sites. Rishikesh, known as the Yoga Capital of the World, attracts spiritual seekers and practitioners from around the globe. Uttarakhand's pristine natural beauty, including the holy River Ganga, adds to its spiritual allure.",
-      imageUrl:
-        "https://static.toiimg.com/thumb/103720915/Tapovan-Uttarakhand.jpg",
-      region: "North India, Uttarakhand",
-    },
-    {
-      _id: "64cf2d4d5d14628d0ac0a2bf",
-      state: "West Bengal",
-      description:
-        "West Bengal, located in eastern India, is a state deeply rooted in spirituality and religious traditions. The state is home to the global headquarters of the Ramakrishna Mission, founded by Sri Ramakrishna Paramhansa, a prominent spiritual leader. Kolkata, the capital city, is renowned for its vibrant Durga Puja celebrations, which showcase the state's devotion to the Hindu goddess Durga. West Bengal's rich religious heritage also includes the sacred Dakshineswar Kali Temple and the Belur Math, a monastic order founded by Swami Vivekananda.",
-      imageUrl:
-        "https://www.holidify.com/images/bgImages/WEST-BENGAL.jpg",
-      region: "East India, West Bengal",
-    },
-    {
-      _id: "64cf2d4d5d14628d0ac0a2be",
-      state: "Tamil Nadu",
-      description:
-        "Tamil Nadu, a state in southern India, is a hub of rich spiritual and religious traditions. The state is home to numerous ancient Hindu temples, including the Brihadeeswara Temple in Thanjavur, a UNESCO World Heritage Site, and the Sri Ranganathaswamy Temple in Srirangam. Tamil Nadu is also known for its historic monasteries, such as the Ramana Ashram in Tiruvannamalai, which attracted spiritual seekers from around the world. The state's vibrant festivals, like the Pongal and Thaipusam, celebrate the divine with devotion and grandeur.",
-      imageUrl:
-        "https://cdn.britannica.com/12/100812-050-27483D5E/Mamallapuram-Shore-Temple-Chennai-India-Tamil-Nadu.jpg",
-      region: "South India, Tamil Nadu",
-    },
-    {
-      _id: "64cf2d4d5d14628d0ac0a2c0",
-      state: "Maharashtra",
-      description:
-        "Maharashtra, a state in western India, is a melting pot of diverse religious and spiritual traditions. The state is home to the revered Shirdi Sai Baba Temple, which attracts millions of devotees every year. Mumbai, the capital city, boasts iconic religious landmarks like the Haji Ali Dargah and the Siddhivinayak Temple. Maharashtra is also known for its rich Buddhist heritage, with the rock-cut caves of Ajanta and Ellora being UNESCO World Heritage Sites. The state's vibrant festivals, like Ganesh Chaturthi and Diwali, showcase its cultural and spiritual diversity.",
-      imageUrl:
-        "https://img.traveltriangle.com/blog/wp-content/uploads/2020/01/cover-image-of-Places-to-visit-in-Maharashtra-in-June_27th-jan.jpg",
-      region: "West India, Maharashtra",
-    },
-]
+  const {countries, isLoading, error, refetch} = fetchCountries();
+//   const countries =  [
+//     {
+//      _id: "64c62bfc65af9f8c969a8d04",
+//      country: "USA",
+//      description:
+//        "The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.The USA is a tourist magnet, known for its diverse landscapes, rich history, and vibrant culture. From the sun-kissed beaches of California to the bustling streets of New York City, there's something for every traveler.",
+//      imageUrl:
+//        "https://d326fntlu7tb1e.cloudfront.net/uploads/1bcdbbd0-d702-475d-92ea-d9171c041674-vinci_01_places_new_york.jpg",
+//      region: "North America, USA",
+//    },
+//    {
+//      _id: "64cf2c565d14628d0ac0a2b7",
+//      country: "Pakistan",
+//      description:
+//        "Pakistan is a country located in South Asia. It shares borders with India, Afghanistan, Iran, and China. The country is known for its diverse culture, rich history, and breathtaking landscapes. From the mighty peaks of the Karakoram mountain range to the vast deserts of Thar, Pakistan offers a wide range of geographical wonders. Its cities, like Karachi, Lahore, and Islamabad, are bustling hubs of activity, blending modernity with tradition. Pakistan has a deep-rooted history, with ancient civilizations like the Indus Valley civilization leaving their mark. The country is also famous for its delicious cuisine, warm hospitality, and vibrant festivals.",
+//      imageUrl:
+//        "https://d326fntlu7tb1e.cloudfront.net/uploads/7528d77c-a022-4160-bdba-601e9f76cf33-vinvi_05_pakistan.jpg",
+//      region: "South Asia, Pakistan",
+//    },
+//    {
+//      _id: "64cf2c935d14628d0ac0a2b9",
+//      country: "India",
+//      description:
+//        "India is a vast and diverse country in South Asia. It is known for its cultural heritage, historical landmarks, and geographical variety. The country boasts a rich history that dates back thousands of years, with influences from various civilizations. India's landscape ranges from the snowy peaks of the Himalayas to the lush greenery of Kerala's backwaters. The Taj Mahal, Jaipur's palaces, and the ancient temples of Varanasi are just a few of the country's iconic landmarks. Indian cuisine is famous worldwide, offering a symphony of flavors and spices. With its bustling cities, serene villages, and colorful festivals, India presents a kaleidoscope of experiences for travelers.",
+//      imageUrl:
+//        "https://d326fntlu7tb1e.cloudfront.net/uploads/f39f32a0-f484-4b4f-b8c4-3e8405743a20-vinci_02_india.jpg",
+//      region: "South Asia, India",
+//    },
+//    {
+//      _id: "64cf2d095d14628d0ac0a2bd",
+//      country: "England",
+//      description:
+//        "England, a country within the United Kingdom, is steeped in history and culture. Its capital, London, is a bustling metropolis known for its iconic landmarks, including the Tower Bridge, Buckingham Palace, and the British Museum. England's countryside is picturesque, with rolling hills, charming villages, and historical sites such as Stonehenge. The country has a rich literary heritage, with famous authors like William Shakespeare, Jane Austen, and Charles Dickens hailing from its shores. English pubs, afternoon tea, and traditional events like Wimbledon and the Changing of the Guard add to its unique charm. England's influence on politics, literature, and sport has made it a global powerhouse with a lasting legacy.",
+//      imageUrl:
+//        "https://d326fntlu7tb1e.cloudfront.net/uploads/22851342-00da-4764-8728-b6dd356e51c0-vinci_03_paris.jpg",
+//      region: "Europe, England",
+//    },
+//    {
+//      _id: "64cf2d4d5d14628d0ac0a2bf",
+//      country: "China",
+//      description:
+//        "China, the world's most populous country, is located in East Asia. With a history spanning over 5,000 years, it is one of the oldest continuous civilizations. China is known for its diverse landscapes, from the majestic Great Wall winding through mountains to the breathtaking karst scenery in Guilin. Its bustling cities, like Beijing and Shanghai, showcase a unique blend of ancient traditions and modern innovations. Chinese culture is rich in art, music, and philosophy, with iconic elements such as calligraphy, tea ceremonies, and traditional Chinese medicine. The country's cuisine, including dim sum, Peking duck, and Sichuan hotpot, is celebrated globally. China's contributions to science, technology, and literature have had a profound impact on the world, making it a global powerhouse in various fields.",
+//      imageUrl:
+//        "https://d326fntlu7tb1e.cloudfront.net/uploads/45e7d539-23c4-4b9a-91c8-1b0dec6e2ae9-vinci_04_china.jpg",
+//      region: "East Asia, China",
+//    },
+// ]
+  if(isLoading){
+    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
+  }
+
   return (
     <View>
      <HeightSpacer height={20}/>
 
      <VirtualizedList 
-     data={state}
+     data={countries}
      horizontal
      keyExtractor={(item) => item._id}
      showsHorizontalScrollIndicator={false}
