@@ -4,35 +4,31 @@ import axios from "axios";
 const fetchCountries = () => {
     const [countries, setCountries] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null)
+    const [error, setError] = useState(null);
 
-
-    const fetchData = async ()=> {
-        setIsLoading(true)
+    const fetchData = async () => {
+        setIsLoading(true);
 
         try {
             const response = await axios.get('http://localhost:5003/api/countries');
-
-            setCountries(response.data.countries)
-            setIsLoading(false)
+            setCountries(response.data.countries);
         } catch (error) {
-           setError(error) 
-        } finally{
-            setIsLoading(false)
+            setError(error);
+        } finally {
+            setIsLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
-        fetchData()
-    }, [])
-
-    const refetch =() => {
-        setIsLoading(true)
         fetchData();
-    }
+    }, []);
 
+    const refetch = () => {
+        setIsLoading(true);
+        fetchData();
+    };
 
-    return {countries, isLoading, error, refetch}
-}
+    return { countries, isLoading, error, refetch };
+};
 
-export default fetchCountries
+export default fetchCountries;

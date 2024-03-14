@@ -6,29 +6,29 @@ import Country from "../Tiles/Country/Country";
 import fetchCountries from "../../hook/fetchContries";
 
 const Places = () => {
-  const {countries, isLoading, error, refetch} = fetchCountries();
+  const { countries, isLoading, error, refetch } = fetchCountries();
 
-  if(isLoading){
-    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue}/>
+  if (isLoading) {
+    return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
   }
 
   return (
     <View>
-     <HeightSpacer height={20}/>
+      <HeightSpacer height={20} />
 
-     <VirtualizedList 
-     data={countries}
-     horizontal
-     keyExtractor={(item) => item._id}
-     showsHorizontalScrollIndicator={false}
-     getItemCount={(data)=> data.length}
-     getItem={(data, index)=> data[index]}
-     renderItem={({item, index})=> (
-        <View style={{marginRight: SIZES.medium}}>
-          <Country item={item}/>
-        </View>
-     )}
-     />
+      <VirtualizedList
+        data={countries}
+        horizontal
+        keyExtractor={(item) => item._id}
+        showsHorizontalScrollIndicator={false}
+        getItemCount={(data) => data.length}
+        getItem={(data, index) => data[index]}
+        renderItem={({ item, index }) => (
+          <View style={{ marginRight: SIZES.medium }}>
+            <Country item={item} />
+          </View>
+        )}
+      />
     </View>
   );
 };
