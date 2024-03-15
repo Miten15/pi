@@ -19,7 +19,7 @@ const ReusableTile2 = ({ item, onPress }) => {
       />
       <View style={styles.overlay}>
         <ReusableText
-          text={item.country}
+          text={item.title}
           family={"medium"}
           size={SIZES.medium}
           color={COLORS.white}

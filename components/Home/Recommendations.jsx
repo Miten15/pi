@@ -9,12 +9,14 @@ import ReusableTile from "../Reusable/ReusableTile"
 import ReusableTile2 from "../Reusable/ReusableTitle2";
 
 import fetchCountries from "../../hook/fetchContries"
+import fetchRecommendations from "../../hook/fetchRecommendations";
 
 
 
   
 const Recommendations = () => {
-  const { countries, isLoading, error, refetch } = fetchCountries();
+
+  const  { recommendations, isLoading, error, refetch } = fetchRecommendations()
 
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
@@ -40,7 +42,7 @@ const Recommendations = () => {
       </View>
 
     <FlatList 
-    data={countries}
+    data={recommendations}
     horizontal
     keyExtractor={(item)=> item._id}
     contentContainerStyle={{columnGap: SIZES.medium}}
