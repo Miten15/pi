@@ -8,7 +8,6 @@ import { Feather } from "@expo/vector-icons";
 import ReusableTile from "../Reusable/ReusableTile"
 import ReusableTile2 from "../Reusable/ReusableTitle2";
 
-import fetchCountries from "../../hook/fetchContries"
 import fetchRecommendations from "../../hook/fetchRecommendations";
 
 
@@ -16,7 +15,7 @@ import fetchRecommendations from "../../hook/fetchRecommendations";
   
 const Recommendations = () => {
 
-  const  { recommendations, isLoading, error, refetch } = fetchRecommendations()
+  const  { recommendations, isLoading, error, refetch } = fetchRecommendations(1)
 
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;

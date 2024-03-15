@@ -10,7 +10,7 @@ const fetchCountries = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.get('http://192.168.0.151:5003/api/countries');
+            const response = await axios.get('http://192.168.0.151:5003/api/countries?limit=5');
             if (response.status === 200) {
                 setCountries(response.data.countries);
                 console.log("API call success:", response.status);
