@@ -1,15 +1,35 @@
+import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, VirtualizedList, ActivityIndicator } from "react-native";
 import React from "react";
 import HeightSpacer from "../Reusable/HeightSpacer";
 import { COLORS, SIZES } from "../../constants/theme";
 import Country from "../Tiles/Country/Country";
-import fetchCountries from "../../hook/fetchContries";
+import fetchCountries from "../../hook/fetchContries"
 
 const Places = () => {
-  const { countries, isLoading, error, refetch } = fetchCountries();
+  const [data, setData] = useState({
+    countries: [],
+    isLoading: false,
+    error: null,
+    refetch: () => {}
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetchCountries();
+      setData(result);
+    }
+    fetchData();
+  }, []);
+
+  const { countries, isLoading, error, refetch } = data;
 
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
+  }
+
+  if (error) {
+    return <Text>Error: {error.message}</Text>;
   }
 
   return (

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 const fetchCountries = () => {
     const [countries, setCountries] = useState([]);
@@ -10,10 +10,16 @@ const fetchCountries = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.get('http://localhost:5003/api/countries');
-            setCountries(response.data.countries);
+            const response = await axios.get('http://192.168.0.151:5003/api/countries');
+            if (response.status === 200) {
+                setCountries(response.data.countries);
+                console.log("API call success:", response.status);
+            } else {
+                console.error("API call unsuccessful:", response.status);
+            }
         } catch (error) {
             setError(error);
+            console.error("API call unsuccessful:  ", error);
         } finally {
             setIsLoading(false);
         }
@@ -32,3 +38,4 @@ const fetchCountries = () => {
 };
 
 export default fetchCountries;
+
