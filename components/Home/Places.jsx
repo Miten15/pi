@@ -7,22 +7,9 @@ import Country from "../Tiles/Country/Country";
 import fetchCountries from "../../hook/fetchContries"
 
 const Places = () => {
-  const [data, setData] = useState({
-    countries: [],
-    isLoading: false,
-    error: null,
-    refetch: () => {}
-  });
+  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchCountries();
-      setData(result);
-    }
-    fetchData();
-  }, []);
-
-  const { countries, isLoading, error, refetch } = data;
+  const { countries, isLoading, error, refetch } = fetchCountries();
 
   if (isLoading) {
     return <ActivityIndicator size={SIZES.xxLarge} color={COLORS.lightBlue} />;
@@ -35,7 +22,7 @@ const Places = () => {
   return (
     <View>
       <HeightSpacer height={20} />
-
+      
       <VirtualizedList
         data={countries}
         horizontal

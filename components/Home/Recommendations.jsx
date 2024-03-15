@@ -21,9 +21,6 @@ const Recommendations = () => {
   }
   const navigation = useNavigation();
 
-  
-
-  
 
   return (
     <View style={styles.container}>
@@ -43,7 +40,7 @@ const Recommendations = () => {
       </View>
 
     <FlatList 
-    data={''}
+    data={countries}
     horizontal
     keyExtractor={(item)=> item._id}
     contentContainerStyle={{columnGap: SIZES.medium}}
