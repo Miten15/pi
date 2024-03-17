@@ -46,33 +46,33 @@ const HotelCard = ({ item, margin, onPress }) => {
       </View>
     </View>
   </TouchableOpacity>
-)
-}
+  );
+};
 
-export default HotelCard
+export default HotelCard;
 
 const styles = StyleSheet.create({
-card: (margin) => ({
-  width: SIZES.width - 20, // Subtracting padding from both sides
-  height: 170,
-  borderRadius: 16,
-  backgroundColor: COLORS.lightWhite,
-  marginVertical: margin, // Adjust vertical margin
-  paddingHorizontal: 10, // Add horizontal padding
-  paddingTop: 10, // Add top padding
-}),
-cardContent: {
-  flexDirection: 'row', // Align items in row
-  justifyContent: "space-between", //
-
-},
-imageContainer: {
-  flex: 1, // Take up remaining space
-  justifyContent: 'center', // Center image vertically
-  alignItems: 'center', // Center image horizontally
-},
-textContainer: {
-  flex: 1, // Take up remaining space
-  paddingLeft: 10, // Add left padding
-},
-})
+  card: (margin) => ({
+    width: SIZES.width - 20, // Subtracting padding from both sides
+    height: 170,
+    borderRadius: 16,
+    backgroundColor: COLORS.lightWhite,
+    marginVertical: margin, // Adjust vertical margin
+    paddingHorizontal: 10, // Add horizontal padding
+    paddingTop: 10, // Add top padding
+  }),
+  cardContent: {
+    flexDirection: 'row', // Align items in row
+    justifyContent: "space-between", //
+  
+  },
+  imageContainer: {
+    flex: 1, // Take up remaining space
+    justifyContent: 'center', // Center image vertically
+    alignItems: 'center', // Center image horizontally
+  },
+  textContainer: {
+    flex: 1, // Take up remaining space
+    paddingLeft: 10, // Add left padding
+  },
+});

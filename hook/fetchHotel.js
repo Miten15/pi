@@ -1,41 +1,43 @@
 import { useState, useEffect } from "react";
-import axios from 'axios';
+import axios from "axios";
 
-const fetchHotles = () => {
+const fetchHotels = (places) => {
     const [hotels, setHotels] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState(null)
+
 
     const fetchData = async () => {
-        setIsLoading(true);
+        setIsLoading(true)
 
         try {
-            const response = await axios.get('http://192.168.0.151:5003/api/places?limit=4');
-            if (response.status === 200) {
-                setHotels(response.data.places);
-                console.log("API call success:", response.status);
+            if (places === 1) {
+                const response = await axios.get('http://192.168.0.151:5003/api/hotels?limit=3');
+                setHotels(response.data.hotels)
             } else {
-                console.error("API call unsuccessful:", response.status);
+                const response = await axios.get('http://192.168.0.151:5003/api/hotels');
+                setHotels(response.data.hotels)
             }
+
+            setIsLoading(false)
         } catch (error) {
-            setError(error);
-            console.error("API call unsuccessful:  ", error);
+            setError(error)
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
-    };
+    }
 
     useEffect(() => {
-        fetchData();
-    }, []);
+        fetchData()
+    }, [])
 
     const refetch = () => {
-        setIsLoading(true);
+        setIsLoading(true)
         fetchData();
-    };
+    }
 
-    return { recommendations, isLoading, error, refetch };
-};
 
-export default fetchHotles;
+    return { hotels, isLoading, error, refetch }
+}
 
+export default fetchHotels

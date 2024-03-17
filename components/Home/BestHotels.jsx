@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { FlatList, StyleSheet, TouchableOpacity, View , ActivityIndicator} from 'react-native'
 import React from 'react'
 import reusable from '../Reusable/reusable.style'
 import ReusableText from '../Reusable/ReusableText'
@@ -6,85 +6,93 @@ import { COLORS, SIZES, TEXT } from '../../constants/theme'
 import {Feather} from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
 import HotelCard from '../Tiles/Hotels/HotelCard'
+import fetchHotels from '../../hook/fetchHotel'
 const BestHotels = () => {
     const navigation = useNavigation();
-    const packages = [
-      {
-        "_id": "1",
-        "state_id": "64c62bfc65af9f8c969a8d04", // Rajasthan
-        "title": "Khajuraho Temples Pilgrimage",
-        "imageUrl": "https://thefloatingpebbles.com/wp-content/uploads/2023/03/22-10-03-MP22-88-1024x731.jpg",
-        "rating": 4.9,
-        "review": "1204 Reviews",
-        "location": "Khajuraho, Rajasthan",
-        "price": '₹1599 per person'
-      },
-      {
-        "_id": "2",
-        "state_id": "64cf2c935d14628d0ac0a2b9", // Uttar Pradesh
-        "title": "Varanasi Ganga Aarti Experience",
-        "imageUrl": "https://www.raffaeleferrari.com/wp-content/uploads/2020/04/ganga-arti.jpeg",
-        "rating": 4.7,
-        "review": "1204 Reviews",
-        "location": "Varanasi, Uttar Pradesh",
-        "price": '₹1599 per person'
-      },
-      {
-        "_id": "3",
-        "state_id": "64cf2d095d14628d0ac0a2bd", // Uttarakhand
-        "title": "Char Dham Yatra",
-        "imageUrl": "https://static.toiimg.com/photo/98085810.cms",
-        "rating": 4.6,
-        "review": "12854 Reviews",
-        "location": "Uttarakhand",
-        "price": '₹1599 per person'
-      },
-      {
-        "_id": "4",
-        "state_id": "64cf2d4d5d14628d0ac0a2bf", // Tamil Nadu
-        "title": "Meenakshi Temple Heritage Tour",
-        "imageUrl": "https://travelsetu.com/apps/uploads/new_destinations_photos/destination/2023/12/21/a87540ce5aa169669e49bad274149709_1000x1000.jpg",
-        "rating": 4.7,
-        "review": "1204 Reviews",
-        "location": "Madurai, Tamil Nadu",
-        "price":'₹1599 per person'
-      }
-    ]
+    const { hotels, isLoading, error, refetch } =fetchHotels(1);
+    // const hotels =  [
+    //     {
+    //         "_id": "64c674d23cfa5e847bcd5430",
+    //         "country_id": "64c62bfc65af9f8c969a8d04",
+    //         "title": "Seaside Resort",
+    //         "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/f5cae706-9e63-4a7d-9fdd-f63f34b93f37-seaside.jpeg",
+    //         "rating": 4.9,
+    //         "review": "1204 Reviews",
+    //         "location": "Miami Beach, FL"
+    //     },
+    //     {
+    //         "_id": "64c675183cfa5e847bcd5433",
+    //         "country_id": "64c62bfc65af9f8c969a8d04",
+    //         "title": "Mountain Lodge",
+    //         "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/5da4db00-e83f-449a-a97a-b7fa80a5bda6-aspen.jpeg",
+    //         "rating": 4.5,
+    //         "review": "12024 Reviews",
+    //         "location": "Aspen, CO"
+    //     },
+    //     {
+    //         "_id": "64d0b5a4d3cb4985a76ac1aa",
+    //         "country_id": "64c62bfc65af9f8c969a8d04",
+    //         "title": "Hotel Alpha",
+    //         "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/28266df3-1578-4d0d-8015-c5480f64a73d-hotel-alpha.jpeg",
+    //         "rating": 4.7,
+    //         "review": "1204 Reviews",
+    //         "location": "City Center, USA"
+    //     },
+    //     {
+    //         "_id": "64c675be3cfa5e847bcd5439",
+    //         "country_id": "64c62bfc65af9f8c969a8d04",
+    //         "title": "Family-Friendly Resort",
+    //         "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/3e6222dc-6b79-4031-914b-60c220782b72-ff.jpeg",
+    //         "rating": 4.6,
+    //         "review": "12854 Reviews",
+    //         "location": "Orlando, FL"
+    //     },
+    //     {
+    //         "_id": "64c67442776ed29f19727fd7",
+    //         "country_id": "64c62bfc65af9f8c969a8d04",
+    //         "title": "Luxury Hotel 1",
+    //         "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/4fdc30c2-08c5-4bca-b05c-d8b8a60b020f-luxury1.webp",
+    //         "rating": 4.7,
+    //         "review": "1204 Reviews",
+    //         "location": "New York City, NY"
+    //     }
+    // ]
   return (
-    <View style={styles.container}>
-     
-          <View
-            style={[reusable.rowWithSpace("space-between"), { paddingBottom: 20 }]}
-          >
-            <ReusableText
-              text={"Top Trending Packages"}
-              family={"medium"}
-              size={TEXT.large}
-              color={COLORS.black}
-            />
-    
-            <TouchableOpacity onPress={() => navigation.navigate("'HotelList")}>
-              <Feather name="list" size={20} />
-            </TouchableOpacity>
-          </View>
+    <View>
+     <View
+        style={[reusable.rowWithSpace("space-between"), { paddingBottom: 20 }]}
+      >
+        <ReusableText
+          text={"Nearby Hotels"}
+          family={"medium"}
+          size={TEXT.large}
+          color={COLORS.black}
+        />
 
-          <FlatList 
-          data={packages}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle= {{ columnGap: SIZES.medium}}
-          keyExtractor={(item) => item._id}
-          renderItem={({item}) => (
-            <HotelCard item={item} margin={10} onPress={()=> navigation.navigate('HotelDetails')}/>
-          )}
-          />
-    
+        <TouchableOpacity onPress={() => navigation.navigate("HotelList")}>
+          <Feather name="list" size={20} />
+        </TouchableOpacity>
+      </View>
+
+     {isLoading ?
+      (
+        <ActivityIndicator/>
+      ): 
+     ( <FlatList 
+      data={hotels}
+      horizontal
+      keyExtractor={(item)=> item._id}
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{columnGap: SIZES.medium}}
+      renderItem={({item}) => (
+         <HotelCard item={item} margin={10} onPress={()=> navigation.navigate('HotelDetails', item._id)}/>
+      )}
+
+    />)}
     </View>
   )
 }
 
 export default BestHotels
 
-const styles = StyleSheet.create({
- 
-})
+const styles = StyleSheet.create({})
