@@ -1,3 +1,4 @@
+import React from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -5,8 +6,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
 import { useRoute } from "@react-navigation/native";
+import { Feather } from "@expo/vector-icons";
+
 import {
   NetworkImage,
   AppBar,
@@ -18,17 +20,16 @@ import {
 } from "../../components/index";
 import { COLORS, TEXT, SIZES } from "../../constants/theme";
 import reusable from "../../components/Reusable/reusable.style";
-import { Feather } from "@expo/vector-icons";
 import fetchCountry from "../../hook/fetchContry";
 
 const CountryDetails = ({ navigation }) => {
   const route = useRoute();
   const id = route.params;
-  const { country, isLoading, error, refetch } = fetchCountry(id)
- 
+  const { country, isLoading, error, refetch } = fetchCountry(id);
+
   return (
-    <ScrollView>
-      <View>
+    <ScrollView style={styles.container}>
+      <View style={styles.imageContainer}>
         <NetworkImage
           source={country.imageUrl}
           width={"100%"}
@@ -41,9 +42,9 @@ const CountryDetails = ({ navigation }) => {
           left={20}
           right={20}
           title={country.country}
-          color={COLORS.white}
+          
           icon={"search1"}
-          color1={COLORS.white}
+         
           onPress={() => navigation.goBack()}
           onPress1={() => {}}
         />
@@ -59,10 +60,10 @@ const CountryDetails = ({ navigation }) => {
 
         <DescriptionText text={country.description} />
 
-        <View style={{ alignContent: "center" }}>
+        <View style={styles.popularDestinations}>
           <HeightSpacer height={20} />
 
-          <View style={reusable.rowWithSpace("space-between")}>
+          <View style={reusable.rowWithSpace("space-between", 20)}>
             <ReusableText
               text={"Popular Destinations"}
               family={"medium"}
@@ -81,10 +82,10 @@ const CountryDetails = ({ navigation }) => {
 
           <ReusableBtn
             onPress={() => navigation.navigate("HotelSearch")}
-            btnText={"Find Best Hotels"}
+            btnText={"Find Best Packages"}
             width={SIZES.width - 40}
-            backgroundColor={COLORS.green}
-            borderColor={COLORS.green}
+            backgroundColor={COLORS.nf}
+            borderColor={COLORS.nf}
             borderWidth={0}
             textColor={COLORS.white}
           />
@@ -101,8 +102,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F3F4F8",
   },
+  imageContainer: {
+    marginBottom: 20,
+  },
   description: {
     marginHorizontal: 20,
-    paddingTop: 20,
+  },
+  popularDestinations: {
+    alignContent: "center",
   },
 });
