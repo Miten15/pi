@@ -63,7 +63,7 @@ const BestHotels = () => {
         style={[reusable.rowWithSpace("space-between"), { paddingBottom: 20 }]}
       >
         <ReusableText
-          text={"Nearby Hotels"}
+          text={"Top Trending Packages"}
           family={"medium"}
           size={TEXT.large}
           color={COLORS.black}
