@@ -3,8 +3,11 @@ import { COLORS } from "../../constants/theme";
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 20,
+       
         marginHorizontal: 20
+    },
+    container2: {
+        paddingBottom: 10
     },
     titleContainer: {
         margin: 15,
