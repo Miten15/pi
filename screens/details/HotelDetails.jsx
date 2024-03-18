@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity , ActivityIndicator} from "react-native";
 import React from "react";
 import {
   AppBar,
@@ -15,61 +15,25 @@ import styles from "./hotelDetails.style";
 import reusable from "../../components/Reusable/reusable.style";
 import { Rating } from "react-native-stock-star-rating";
 import {Feather} from '@expo/vector-icons'
+import fetchHotelById from "../../hook/fetchHotelById";
+import { useRoute } from "@react-navigation/native";
+
 
 const HotelDetails = ({ navigation }) => {
-  const hotel = {
-    "availability": {
-        "start": "2023-08-10T00:00:00.000Z",
-        "end": "2023-08-17T00:00:00.000Z"
-    },
-    "coordinates": {
-        "latitude": 37.7749,
-        "longitude": -122.4194
-    },
-    "_id": "64d34be53295a816648298d0",
-    "country_id": "64d2fd32618522e2fb342eec",
-    "title": "Hotel Alpha",
-    "description": "Hotel Alpha is a luxurious hotel located in the heart of a bustling city. Experience the best of hospitality with our impeccable service and top-notch facilities. The elegantly designed rooms offer a comfortable stay, and the hotel's strategic location provides easy access to popular attractions and landmarks. Enjoy a variety of amenities, including free Wi-Fi, parking, air conditioning, room service, flat-screen TV, and private bathrooms. Whether you're here for business or leisure, Hotel Alpha promises a memorable and enjoyable stay.",
-    "contact": "64c5d95adc7efae2a45ec376",
-    "imageUrl": "https://d326fntlu7tb1e.cloudfront.net/uploads/28266df3-1578-4d0d-8015-c5480f64a73d-hotel-alpha.jpeg",
-    "rating": 4.7,
-    "review": "253425 Reviews",
-    "location": "City Center, USA",
-    "price": 200,
-    "__v": 1,
-    "reviews": [
-        {
-            "_id": "64d38ff59af9119acfab0ece",
-            "review": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\noptio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\nobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam",
-            "rating": 4.6,
-            "user": {
-                "_id": "64c5d95adc7efae2a45ec376",
-                "username": "John Doe",
-                "profile": "https://d326fntlu7tb1e.cloudfront.net/uploads/4c004766-c0ad-42ed-bef1-6a7616b24c11-vinci_11.jpg"
-            },
-            "updatedAt": "2023-08-09"
-        },
-        {
-            "_id": "64d797efa5628cedef4fce58",
-            "review": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\nmolestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\nnumquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\noptio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\nobcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam",
-            "rating": 4.6,
-            "user": {
-                "_id": "64c5d95adc7efae2a45ec376",
-                "username": "Zoe Doe",
-                "profile": "https://d326fntlu7tb1e.cloudfront.net/uploads/4c004766-c0ad-42ed-bef1-6a7616b24c11-vinci_11.jpg"
-            },
-            "updatedAt": "2023-08-09"
-        }
-    ]
-}
+  const router = useRoute()
+  const id = router.params
+  const {hotel, coordinates, isLoading, error, refetch} = fetchHotelById(id)
 
-  let coordinates = {
-    id: hotel._id,
-    title: hotel.title,
-    latitude: hotel.coordinates.latitude,
-    longitude: hotel.coordinates.longitude,
-    latitudeDelta: 0.01,
-    longitudeDelta: 0.01
+    console.log(coordinates)
+
+
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
   }
 
  
@@ -167,7 +131,7 @@ const HotelDetails = ({ navigation }) => {
             color={COLORS.gray}
           />
 
-          <HotelMap coordinates={coordinates}/>
+<HotelMap coordinates={coordinates}/>
 
           <View style={reusable.rowWithSpace('space-between')}>
           <ReusableText
