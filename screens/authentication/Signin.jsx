@@ -14,7 +14,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import reusable from "../../components/Reusable/reusable.style";
 import { AntDesign } from "@expo/vector-icons";
-
+import RegistraionScreen from "../Auth/RegistraionScreen";
 const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
@@ -214,6 +214,14 @@ const Signin = ({ navigation }) => {
           </View>
         )}
       </Formik>
+      
+      <TouchableOpacity 
+  onPress={() => navigation.navigate('RegistraionScreen')}
+>
+  <Text>
+    Haven't Registered?
+  </Text>
+</TouchableOpacity>
     </View>
   );
 };
