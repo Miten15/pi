@@ -27,7 +27,7 @@ const Slides = ({ item }) => {
         <HeightSpacer height={40} />
 
         <ReusableBtn
-          onPress={() => navigation.navigate('Bottom')}
+          onPress={() => navigation.navigate("SigninScreen")}
           btnText={"Let's go"}
           width={(SIZES.width - 50) / 2.2}
           backgroundColor={COLORS.red}
@@ -35,8 +35,6 @@ const Slides = ({ item }) => {
           borderWidth={0}
           textColor={COLORS.white}
         />
-
-       
       </View>
     </View>
   );

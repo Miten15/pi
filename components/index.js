@@ -15,6 +15,7 @@ import ProfileTile from "./Reusable/ProfileTile";
 import SettingTile from "./Tiles/Settings/SettingTile";
 import AssetImage from "./Reusable/AssetImage";
 import ReusableTile2 from "./Reusable/ReusableTitle2";
+
 export {
     ReusableText,
     ReusableBtn,
@@ -32,5 +33,6 @@ export {
     ProfileTile, 
     SettingTile, 
     AssetImage,
-    ReusableTile2
+    ReusableTile2,
+   
 }

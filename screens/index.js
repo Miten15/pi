@@ -18,8 +18,8 @@ import Payments from './profile/Payments';
 import Settings from './setttings/Settings';
 import Successful from "./bookings/Successful";
 import Failed from "./bookings/Failed";
-
-
+import RegistraionScreen from  "./Auth/RegistraionScreen"
+import SigninScreen from "./Auth/SigninScreen";
 export {
     Onboarding,
     Failed,
@@ -40,5 +40,7 @@ export {
     TopInfo,
     TopTrips,
     Payments,
-    Settings
+    Settings,
+    RegistraionScreen,
+    SigninScreen
 }
