@@ -12,6 +12,8 @@ import reusable from "../../components/Reusable/reusable.style";
 import { AntDesign } from "@expo/vector-icons";
 import Registration from "../authentication/Registration";
 import RegistraionScreen from "../Auth/RegistraionScreen"
+import { useNavigation } from '@react-navigation/native';
+
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -20,7 +22,8 @@ const validationSchema = Yup.object().shape({
   email: Yup.string().email("Provide a valid email").required("Required"),
 });
 
-const Signin = ({ navigation }) => {
+const Signin = () => {
+  const navigation = useNavigation();
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
@@ -62,7 +65,7 @@ const Signin = ({ navigation }) => {
           },
           {
             text: "Continue",
-            onPress: () => {},
+            onPress: () => navigation.navigate("Bottom")
           },
           { defaultIndex: 1 },
         ]);
@@ -78,7 +81,7 @@ const Signin = ({ navigation }) => {
           },
           {
             text: "Continue",
-            onPress: () => {},
+            onPress: () => navigation.navigate("Bottom")
           },
           { defaultIndex: 1 },
         ]

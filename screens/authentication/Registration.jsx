@@ -11,6 +11,7 @@ import {
   ReusableBtn,
 } from "../../components";
 import axios from "axios";
+import { useNavigation } from '@react-navigation/native';
 
 const validationSchema = Yup.object().shape({
   password: Yup.string()
@@ -24,6 +25,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Registration = () => {
+  const navigation = useNavigation();
   const [loader, setLoader] = useState(false);
   const [responseData, setResponseData] = useState(null);
   const [obsecureText, setObsecureText] = useState(false);
@@ -36,7 +38,7 @@ const Registration = () => {
       },
       {
         text: "Continue",
-        onPress: () => {},
+        onPress: () => navigation.navigate("SigninScreen")
       },
       { defaultIndex: 1 },
     ]);
@@ -59,7 +61,7 @@ const Registration = () => {
           },
           {
             text: "Continue",
-            onPress: () => {},
+            onPress: () => navigation.navigate("SigninScreen")
           },
           { defaultIndex: 1 },
         ]);
