@@ -20,6 +20,7 @@ import Successful from "./bookings/Successful";
 import Failed from "./bookings/Failed";
 import RegistraionScreen from  "./Auth/RegistraionScreen"
 import SigninScreen from "./Auth/SigninScreen";
+import Registration from "./authentication/Registration";
 export {
     Onboarding,
     Failed,
@@ -42,5 +43,6 @@ export {
     Payments,
     Settings,
     RegistraionScreen,
-    SigninScreen
+    SigninScreen,
+    Registration
 }

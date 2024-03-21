@@ -5,16 +5,14 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { COLORS, SIZES, TEXT } from "../../constants/theme";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import {
-  WidthSpacer,
-  HeightSpacer,
-  ReusableBtn,
-} from "../../components";
+import { WidthSpacer, HeightSpacer, ReusableBtn } from "../../components";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import reusable from "../../components/Reusable/reusable.style";
 import { AntDesign } from "@expo/vector-icons";
-import RegistraionScreen from "../Auth/RegistraionScreen";
+import Registration from "../authentication/Registration";
+import RegistraionScreen from "../Auth/RegistraionScreen"
+
 const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
@@ -55,7 +53,6 @@ const Signin = ({ navigation }) => {
         await AsyncStorage.setItem("id", JSON.stringify(responseData.id));
         await AsyncStorage.setItem("token", JSON.stringify(responseData.token));
 
-      
         navigation.replace("Bottom");
       } else {
         Alert.alert("Error Logging in ", "Please provide valid credentials ", [
@@ -199,7 +196,12 @@ const Signin = ({ navigation }) => {
             <HeightSpacer height={20} />
 
             <View style={reusable.rowWithSpace("space-between")}>
-              <AntDesign name="leftcircleo" size={45} color={COLORS.green} onPress={()=> navigation.navigate('Bottom')}/>
+              <AntDesign
+                name="leftcircleo"
+                size={45}
+                color={COLORS.green}
+                onPress={() => navigation.navigate("Bottom")}
+              />
 
               <ReusableBtn
                 onPress={isValid ? handleSubmit : errorLogin}
@@ -214,14 +216,14 @@ const Signin = ({ navigation }) => {
           </View>
         )}
       </Formik>
-      
+
       <TouchableOpacity 
-  onPress={() => navigation.navigate('RegistraionScreen')}
->
-  <Text>
-    Haven't Registered?
-  </Text>
-</TouchableOpacity>
+        onPress={() => navigation.navigate("RegistraionScreen")}
+      >
+        <Text>
+          Haven't Registered?
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
