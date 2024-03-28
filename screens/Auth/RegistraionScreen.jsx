@@ -4,8 +4,8 @@ import Registration from "../authentication/Registration";
 
 const RegistraionScreen = () => {
   return (
- 
-      <Registration />
+    <Registration />
+      
     
   );
 };
