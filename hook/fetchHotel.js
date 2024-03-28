@@ -12,7 +12,7 @@ const fetchHotels = (places) => {
 
         try {
             if (places === 1) {
-                const response = await axios.get('http://192.168.0.151:5003/api/hotels?limit=3');
+                const response = await axios.get('http://192.168.0.151:5003/api/hotels');
                 setHotels(response.data.hotels)
             } else {
                 const response = await axios.get('http://192.168.0.151:5003/api/hotels');

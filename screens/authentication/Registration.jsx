@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import { useNavigation } from '@react-navigation/native';
 
+
 const validationSchema = Yup.object().shape({
   password: Yup.string()
     .min(8, "Password must be at least 8 characters")
@@ -250,6 +251,16 @@ const Registration = () => {
             <ReusableBtn
               onPress={isValid? handleSubmit : errorLogin}
               btnText={"REGISTER"}
+              width={SIZES.width - 40}
+              backgroundColor={COLORS.green}
+              borderColor={COLORS.green}
+              borderWidth={0}
+              textColor={COLORS.white}
+            />
+
+<ReusableBtn
+              onPress={() => navigation.navigate("SigninScreen")}
+              btnText={"singup"}
               width={SIZES.width - 40}
               backgroundColor={COLORS.green}
               borderColor={COLORS.green}

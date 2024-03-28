@@ -10,7 +10,7 @@ const fetchRecommendations = () => {
         setIsLoading(true);
 
         try {
-            const response = await axios.get('http://192.168.0.151:5003/api/places?limit=4');
+            const response = await axios.get('http://192.168.0.151:5003/api/places');
             if (response.status === 200) {
                 setRecommendations(response.data.places);
                 console.log("API call success:", response.status);

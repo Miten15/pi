@@ -14,7 +14,7 @@ import ReviewsList from "./Hotel/ReviewsList";
 import ProfileTile from "./Reusable/ProfileTile";
 import SettingTile from "./Tiles/Settings/SettingTile";
 import AssetImage from "./Reusable/AssetImage";
-import ReusableTile2 from "./Reusable/ReusableTitle2";
+
 
 export {
     ReusableText,
@@ -33,6 +33,6 @@ export {
     ProfileTile, 
     SettingTile, 
     AssetImage,
-    ReusableTile2,
+  
    
 }
